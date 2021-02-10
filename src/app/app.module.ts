@@ -18,9 +18,11 @@ import { Routes,RouterModule } from '@angular/router';
 const appRoutes: Routes=[
   {path: 'auth/signup', component: SignupComponent},
   {path: 'auth/signin', component: SigninComponent},
-  {path: 'automations', component: AutomationListComponent},
-  {path: 'automations/new', component: AutomationFormComponent},
-  {path: 'automations/view/:id', component: SingleAutomationComponent},
+  {path: 'automations',canActivate: [AuthGuardService], component: AutomationListComponent},
+  {path: 'automations/new',canActivate: [AuthGuardService], component: AutomationFormComponent},
+  {path: 'automations/view/:id',canActivate: [AuthGuardService], component: SingleAutomationComponent},
+  { path: '', redirectTo: 'automations', pathMatch: 'full' },
+  { path: '**', redirectTo: 'automations' },
 ]
 
 @NgModule({
