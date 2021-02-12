@@ -1,15 +1,15 @@
 <div class="row">
-  <div class="col-sm-10 col-sm-offset-2">
+  <div class="col-sm-10 col-sm-offset-1">
     <h2>Enregistrer un nouvel automatisme</h2>
     <form [formGroup]="automationForm" (ngSubmit)="onSaveAutomation()">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="title">Nom du produit</label>
             <input type="text" class="form-control" id="title" placeholder="Nom" formControlName="title">
           </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="reference">Référence du produit</label>
             <input type="text" class="form-control" id="reference" placeholder="Reference" formControlName="reference">
@@ -17,13 +17,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="ampere">Entrer la consomation max de l'automatisme en Ampere</label>
             <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="ampere" placeholder="Courant" formControlName="ampere">
           </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="cycleTime">Entrer le temps d'une manouvre d'ouverture en seconde</label>
             <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="cycleTime" placeholder="Temps de cycle" formControlName="cycleTime">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <div class="form-group">
             <label for="type">Type du produit:</label>
             <select class="form-control" id="type" placeholder="Type" formControlName="type">
@@ -41,7 +41,7 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="form-group">
               <label for="standBy">Entrer la consomation en Stand-By</label>
               <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="standBy" placeholder="Consomation à l'arret" formControlName="standBy">

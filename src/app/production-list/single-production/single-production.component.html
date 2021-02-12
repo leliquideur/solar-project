@@ -1,1 +1,16 @@
-<p>single-production works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <img style="max-width:400px;" *ngIf="production.photo" [src]="production.photo">
+    <h1>{{ production.title }}</h1>
+    <h3>Référence : {{ production.reference }}</h3>
+    <h3>Production max par heure : {{ production.watt }} watt</h3>
+    <button class="btn btn-default" (click)="onBack()">Retour</button>
+    <button class="btn btn-default pull-right"
+            (click)="onDeleteProduction(production)">
+            <span >
+              Supprimer de la base de donnée
+            </span>
+    </button>
+  </div>
+
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { AutomationsService } from 'src/app/services/automation.service';
+import { ProductionsService } from 'src/app/services/production.service';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
@@ -57,7 +58,9 @@ const appRoutes: Routes=[
   providers: [
     AuthService,
     AuthGuardService,
-    AutomationsService
+    AutomationsService,
+    ProductionsService
+
   ],
   bootstrap: [AppComponent]
 })
