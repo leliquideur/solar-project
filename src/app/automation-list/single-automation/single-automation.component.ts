@@ -16,7 +16,7 @@ export class SingleAutomationComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.automation=new Automation('','',0,0);
+    this.automation=new Automation('','','',0,0,0,0);
     const id =this.route.snapshot.params["id"];
     this.automationsService.getSingleAutomation(+id).then(
       (automation:Automation)=>{
@@ -29,6 +29,7 @@ export class SingleAutomationComponent implements OnInit {
   }
   onDeleteAutomation(automation: Automation){
     this.automationsService.removeAutomation(automation);
+    this.onBack();
   }
 
 }

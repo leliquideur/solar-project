@@ -24,16 +24,21 @@ export class AutomationFormComponent implements OnInit {
     this.automationForm = this.formBuilder.group({
       title: ['', Validators.required],
       reference: ['', Validators.required],
+      type: ['', Validators.required],
       cycleTime: ['', Validators.required],
-      ampere: ['', Validators.required]
+      ampere: ['', Validators.required],
+      standBy: ['', Validators.required],
     })
   }
   onSaveAutomation() {
     const title = this.automationForm.get('title').value;
     const reference = this.automationForm.get('reference').value;
+    const type = this.automationForm.get('type').value;
     const cycleTime = this.automationForm.get('cycleTime').value * 2;
     const ampere = this.automationForm.get('ampere').value;
-    const newAutomation = new Automation(title, reference, cycleTime, ampere);
+    const standBy = this.automationForm.get('standBy').value;
+    const cylceAmpere = cycleTime*ampere/3600;
+    const newAutomation = new Automation(title, reference, type, cycleTime, ampere, standBy, cylceAmpere);
     this.automationsService.createNewAutomation(newAutomation);
     this.router.navigate(['/automations']);
   }

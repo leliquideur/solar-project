@@ -14,6 +14,11 @@ import { AutomationListComponent } from './automation-list/automation-list.compo
 import { AutomationFormComponent } from './automation-list/automation-form/automation-form.component';
 import { HeaderComponent } from './header/header.component';
 import { Routes,RouterModule } from '@angular/router';
+import { ProductionListComponent } from './production-list/production-list.component';
+import { ProductionFormComponent } from './production-list/production-form/production-form.component';
+import { SingleProductionComponent } from './production-list/single-production/single-production.component';
+
+
 
 const appRoutes: Routes=[
   {path: 'auth/signup', component: SignupComponent},
@@ -33,7 +38,11 @@ const appRoutes: Routes=[
     SingleAutomationComponent,
     AutomationListComponent,
     AutomationFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProductionListComponent,
+    ProductionFormComponent,
+    SingleProductionComponent,
+
   ],
   imports: [
     BrowserModule,
