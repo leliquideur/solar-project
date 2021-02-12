@@ -64,7 +64,6 @@ export class ProductionsService {
     }else{
       console.log('Pas de photo trouvée ');
     }
-console.log('67');
     const productionIndexToRemove = this.productions.findIndex(
       (productionEl) => {
         if (productionEl === production) {

@@ -12,6 +12,11 @@ import { Production } from 'src/app/models/Production.model';
 export class ProductionFormComponent implements OnInit {
 
   productionForm: FormGroup;
+  fileIsUploading=false;
+  fileUrl: string;
+  fileEvent: File;
+  fileUploaded = false;
+  fileDecteted=false;
 
   constructor(private formBuilder: FormBuilder,
     private productionsService: ProductionsService,
@@ -32,8 +37,30 @@ export class ProductionFormComponent implements OnInit {
     const reference = this.productionForm.get('reference').value;
     const watt = this.productionForm.get('watt').value;
     const newProduction = new Production(title, reference, watt);
+    if(this.fileDecteted){
+      this.fileIsUploading = true;
+      this.productionsService.uploadFile(this.fileEvent).then(
+        (url: string)=>{
+          this.fileUrl=url;
+          this.fileIsUploading=false;
+          this.fileUploaded=true;
+          newProduction.photo = this.fileUrl;
+          this.productionsService.createNewProduction(newProduction);
+          this.router.navigate(['/productions']);
+        },
+        ()=>{
+          this.productionsService.createNewProduction(newProduction);
+          this.router.navigate(['/productions']);
+        }
+      );
+
+    }
     this.productionsService.createNewProduction(newProduction);
     this.router.navigate(['/productions']);
   }
 
+  detectFiles(event: any){
+    this.fileEvent=event.target.files[0];
+    this.fileDecteted=true;
+  }
 }
