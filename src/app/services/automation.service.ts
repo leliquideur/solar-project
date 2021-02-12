@@ -50,6 +50,7 @@ export class AutomationsService {
     this.emitAutomations();
   }
   removeAutomation(automation: Automation) {
+    console.log('appel de la fonction removeAutomation')
     if (automation.photo) {
       const storageRef = firebase.storage().refFromURL(automation.photo);
       storageRef.delete().then(
@@ -60,7 +61,10 @@ export class AutomationsService {
           console.log('Could not remove photo! : ' + error);
         }
       );
+    }else{
+      console.log('Pas de photo trouvée ');
     }
+console.log('67');
     const automationIndexToRemove = this.automations.findIndex(
       (automationEl) => {
         if (automationEl === automation) {

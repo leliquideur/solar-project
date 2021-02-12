@@ -27,5 +27,8 @@ export class SingleAutomationComponent implements OnInit {
   onBack(){
     this.router.navigate(['/automations']);
   }
+  onDeleteAutomation(automation: Automation){
+    this.automationsService.removeAutomation(automation);
+  }
 
 }

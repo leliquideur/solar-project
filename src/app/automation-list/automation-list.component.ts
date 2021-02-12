@@ -26,9 +26,7 @@ export class AutomationListComponent implements OnInit, OnDestroy {
   onNewAutomation(){
     this.router.navigate(['/automations','new'])
   }
-  onDeleteAutomation(automation: Automation){
-    this.automationsService.removeAutomation(automation);
-  }
+
   onViewAutomation(id: number){
     this.router.navigate(['/automations','view',id]);
   }
