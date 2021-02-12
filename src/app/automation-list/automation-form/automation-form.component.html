@@ -1,1 +1,48 @@
-<p>automation-form works!</p>
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-2">
+    <h2>Enregistrer un nouvel automatisme</h2>
+    <form [formGroup]="automationForm" (ngSubmit)="onSaveAutomation()">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="title"></label>
+            <input type="text" class="form-control" id="title" placeholder="Nom" formControlName="title">
+            <p class="help-block">Nom du produit</p>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="reference"></label>
+            <input type="text" class="form-control" id="reference" placeholder="Reference" formControlName="reference">
+            <p class="help-block">Référence du produit</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="ampere"></label>
+            <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="ampere" placeholder="Courant" formControlName="ampere">
+            <p class="help-block">Entrer la consomation max de l'automatisme en Ampere</p>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="cycleTime"></label>
+            <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="cycleTime" placeholder="Temps de cycle" formControlName="cycleTime">
+            <p class="help-block">Entrer le temps d'une manouvre d'ouverture en seconde</p>
+          </div>
+        </div>
+      </div>
+      
+      <!--<div class="form-group">
+              <h4>Ajouter une photo</h4>
+              <input type="file" (change)="detectFiles($event)"
+                     class="form-control" accept="image/*">
+              <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+          </div>-->
+      <button class="btn btn-success" [disabled]="automationForm.invalid" type="submit">Enregistrer
+      </button>
+    </form>
+  </div>
+</div>

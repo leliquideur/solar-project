@@ -1,1 +1,8 @@
-<p>single-automation works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <!--<img style="max-width:400px;" *ngIf="automation.photo" [src]="automation.photo">-->
+    <h1>{{ automation.title }}</h1>
+    <h3>{{ automation.reference }}</h3>
+    <button class="btn btn-default" (click)="onBack()">Retour</button>
+  </div>
+</div>
