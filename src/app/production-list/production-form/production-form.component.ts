@@ -12,11 +12,17 @@ import { Production } from 'src/app/models/Production.model';
 export class ProductionFormComponent implements OnInit {
 
   productionForm: FormGroup;
-  fileIsUploading=false;
+  fileIsUploading = false;
   fileUrl: string;
   fileEvent: File;
   fileUploaded = false;
-  fileDecteted=false;
+  fileDecteted = false;
+
+  title: string = "test";
+  reference: string = "test";
+  watt: number = 0;
+  photo: string;
+  production: Production;
 
   constructor(private formBuilder: FormBuilder,
     private productionsService: ProductionsService,
@@ -27,9 +33,9 @@ export class ProductionFormComponent implements OnInit {
   }
   initFormm() {
     this.productionForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      reference: ['', Validators.required],
-      watt: ['', Validators.required],
+      title: [this.title, Validators.required],
+      reference: [this.reference, Validators.required],
+      watt: [this.watt, Validators.required],
     })
   }
   onSaveProduction() {
@@ -37,30 +43,66 @@ export class ProductionFormComponent implements OnInit {
     const reference = this.productionForm.get('reference').value;
     const watt = this.productionForm.get('watt').value;
     const newProduction = new Production(title, reference, watt);
-    if(this.fileDecteted){
-      this.fileIsUploading = true;
-      this.productionsService.uploadFile(this.fileEvent).then(
-        (url: string)=>{
-          this.fileUrl=url;
-          this.fileIsUploading=false;
-          this.fileUploaded=true;
-          newProduction.photo = this.fileUrl;
+    if (this.fileDecteted) {
+      this.savePhoto(newProduction).then(
+        ()=>{
           this.productionsService.createNewProduction(newProduction);
           this.router.navigate(['/productions']);
         },
         ()=>{
-          this.productionsService.createNewProduction(newProduction);
-          this.router.navigate(['/productions']);
+          console.log("erreur");
         }
       );
 
+    } else {
+      this.productionsService.createNewProduction(newProduction);
+      this.router.navigate(['/productions']);
     }
-    this.productionsService.createNewProduction(newProduction);
-    this.router.navigate(['/productions']);
+  }
+  private savePhoto(newProduction: Production): Promise<unknown> {
+    console.log('appel fait de this.savePhoto');
+    return new Promise(
+      (resolve,reject) => {
+        this.fileIsUploading = true;
+        this.productionsService.uploadFile(this.fileEvent).then(
+          (url: string) => {
+            this.fileUrl = url;
+            this.fileIsUploading = false;
+            this.fileUploaded = true;
+            newProduction.photo = this.fileUrl;
+            this.production=newProduction;
+            console.log(newProduction);
+            resolve(console.log("promise resolvé de save photo"));
+          }
+        );
+        ()=>{
+          reject(console.log("promise rejeté de save photo"))
+        }
+      }
+    );
   }
 
-  detectFiles(event: any){
-    this.fileEvent=event.target.files[0];
-    this.fileDecteted=true;
+
+  onSavePhoto(newProduction: Production): Promise<unknown> {
+    return new Promise(
+      (resolve) => {
+        if (this.photo) {
+          this.productionsService.removePhoto(this.production).then(
+            () => {
+              this.savePhoto(newProduction);
+            }
+          );
+        }
+        () => {
+          resolve
+        }
+      }
+    );
+  }
+
+
+  detectFiles(event: any) {
+    this.fileEvent = event.target.files[0];
+    this.fileDecteted = true;
   }
 }

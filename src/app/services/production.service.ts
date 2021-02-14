@@ -44,6 +44,26 @@ export class ProductionsService {
       },
     );
   }
+  removePhoto(production: Production): Promise<unknown> {
+    return new Promise(
+      (resolve, reject) => {
+        const storageRef = firebase.storage().refFromURL(production.photo);
+        storageRef.delete().then(
+          () => {
+            console.log('Photo removed!');
+          },
+          (error) => {
+            console.log('Could not remove photo! : ' + error);
+          }
+        );
+        () => {
+          resolve(console.log("resole de removePhoto OK"));
+        }
+      }
+    )
+
+  }
+
   public createNewProduction(newProduction: Production): void {
     this.productions.push(newProduction);
     this.saveProductions();
@@ -61,7 +81,7 @@ export class ProductionsService {
           console.log('Could not remove photo! : ' + error);
         }
       );
-    }else{
+    } else {
       console.log('Pas de photo trouvée ');
     }
     const productionIndexToRemove = this.productions.findIndex(
