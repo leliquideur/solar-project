@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductionsService } from 'src/app/services/production.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'
+import { ActivatedRoute,Router } from '@angular/router'
 import { Production } from 'src/app/models/Production.model';
 
 @Component({
@@ -23,15 +23,30 @@ export class ProductionFormComponent implements OnInit {
   watt: number = 0;
   photo: string;
   production: Production;
+  id: number;
 
-  constructor(private formBuilder: FormBuilder,
-    private productionsService: ProductionsService,
-    private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private productionsService: ProductionsService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.initFormm();
+    this.id = this.route.snapshot.params["id"];
+    this.productionsService.getSingleProduction(this.id).then(
+      (production:Production)=>{
+              this.production=production;
+              this.initFormm();
+      }
+    );
   }
   initFormm() {
+    if (this.production) {/*init si c'est une modife grace au numéro d'id*/
+      console.log("Producteur reconnu: "+this.production.title)
+      this.title=this.production.title;
+      this.reference=this.production.reference;
+      this.watt=this.production.watt;
+      this.photo=this.production.photo;
+    }
     this.productionForm = this.formBuilder.group({
       title: [this.title, Validators.required],
       reference: [this.reference, Validators.required],
@@ -45,11 +60,11 @@ export class ProductionFormComponent implements OnInit {
     const newProduction = new Production(title, reference, watt);
     if (this.fileDecteted) {
       this.savePhoto(newProduction).then(
-        ()=>{
+        () => {
           this.productionsService.createNewProduction(newProduction);
           this.router.navigate(['/productions']);
         },
-        ()=>{
+        () => {
           console.log("erreur");
         }
       );
@@ -62,7 +77,7 @@ export class ProductionFormComponent implements OnInit {
   private savePhoto(newProduction: Production): Promise<unknown> {
     console.log('appel fait de this.savePhoto');
     return new Promise(
-      (resolve,reject) => {
+      (resolve, reject) => {
         this.fileIsUploading = true;
         this.productionsService.uploadFile(this.fileEvent).then(
           (url: string) => {
@@ -70,12 +85,12 @@ export class ProductionFormComponent implements OnInit {
             this.fileIsUploading = false;
             this.fileUploaded = true;
             newProduction.photo = this.fileUrl;
-            this.production=newProduction;
+            this.production = newProduction;
             console.log(newProduction);
             resolve(console.log("promise resolvé de save photo"));
           }
         );
-        ()=>{
+        () => {
           reject(console.log("promise rejeté de save photo"))
         }
       }

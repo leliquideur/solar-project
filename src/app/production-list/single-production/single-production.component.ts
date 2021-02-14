@@ -10,15 +10,15 @@ import{ActivatedRoute,Router}from'@angular/router';
 })
 export class SingleProductionComponent implements OnInit {
   production: Production;
-
+  id:number;
   constructor(private route: ActivatedRoute,
               private productionsService: ProductionsService,
               private router: Router) { }
 
   ngOnInit(): void {
     this.production=new Production('','',0,);
-    const id =this.route.snapshot.params["id"];
-    this.productionsService.getSingleProduction(+id).then(
+    this.id =this.route.snapshot.params["id"];
+    this.productionsService.getSingleProduction(this.id).then(
       (production:Production)=>{
               this.production=production;
       }
@@ -30,6 +30,9 @@ export class SingleProductionComponent implements OnInit {
   onDeleteProduction(production: Production){
     this.productionsService.removeProduction(production);
     this.onBack();
+  }
+  onModifyProduction(production: Production){
+    this.router.navigate(['/productions','new',this.id]);
   }
 
 }

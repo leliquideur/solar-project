@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-10 col-sm-offset-1">
     <h2>Enregistrer un nouveau consomateur</h2>
-    <form [formGroup]="productionForm" (ngSubmit)="onSaveProduction()">
+    <form *ngIf="productionForm" [formGroup]="productionForm" (ngSubmit)="onSaveProduction()">
       <div class="row">
         <div class="form-group">
           <label for="title">Nom du produit</label>
@@ -16,8 +16,9 @@
           <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="watt" placeholder="ex: 80" formControlName="watt">
         </div>
       </div>
+      <img style="max-width:400px;" *ngIf="production.photo" [src]="production.photo">
       <div class="form-group">
-        <h4>Ajouter une photo</h4>
+        <h4>Ajouter/Modifier une photo</h4>
         <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
         <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
       </div>

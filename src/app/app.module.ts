@@ -29,6 +29,7 @@ const appRoutes: Routes=[
   {path: 'automations/view/:id',canActivate: [AuthGuardService], component: SingleAutomationComponent},
   {path: 'productions',canActivate: [AuthGuardService], component: ProductionListComponent},
   {path: 'productions/new',canActivate: [AuthGuardService], component: ProductionFormComponent},
+  {path: 'productions/new/:id',canActivate: [AuthGuardService], component: ProductionFormComponent},
   {path: 'productions/view/:id',canActivate: [AuthGuardService], component: SingleProductionComponent},
   { path: '', redirectTo: 'automations', pathMatch: 'full' },
   { path: '**', redirectTo: 'automations' },

@@ -6,10 +6,12 @@
     <h3>Production max par heure : {{ production.watt }} watt</h3>
     <button class="btn btn-default" (click)="onBack()">Retour</button>
     <button class="btn btn-default pull-right"
+            (click)="onModifyProduction(production)">
+            <span >Modifier</span>
+    </button>
+    <button class="btn btn-default pull-right"
             (click)="onDeleteProduction(production)">
-            <span >
-              Supprimer de la base de donnée
-            </span>
+            <span >Supprimer</span>
     </button>
   </div>
 
