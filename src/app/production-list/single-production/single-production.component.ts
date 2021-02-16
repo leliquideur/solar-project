@@ -22,7 +22,6 @@ export class SingleProductionComponent implements OnInit {
       (production: Production) => {
         this.production = production;
         this.production.uid = this.id;
-        console.log("this.production.uid=" + this.production.uid)
       }
     );
   }
@@ -30,13 +29,13 @@ export class SingleProductionComponent implements OnInit {
     this.router.navigate(['/productions']);
   }
   onDeleteProduction(production: Production) {
-    /*if(confirm('Supprimer votre appareils ?')) {*/
-    console.log("this.production.uid=" + this.production.uid)
-    this.productionsService.removeProduction(production);
-    this.onBack();
-    /*} else {
+    if (confirm('Supprimer votre appareils ?')) {
+      console.log("this.production.uid=" + this.production.uid)
+      this.productionsService.removeProduction(production);
+      this.onBack();
+    } else {
       return null;
-    }*/
+    }
   }
   onModifyProduction() {
     this.router.navigate(['/productions', 'new', this.id]);

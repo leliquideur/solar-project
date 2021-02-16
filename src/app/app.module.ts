@@ -4,8 +4,8 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { AutomationsService } from 'src/app/services/automation.service';
 import { ProductionsService } from 'src/app/services/production.service';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -14,23 +14,25 @@ import { SingleAutomationComponent } from './automation-list/single-automation/s
 import { AutomationListComponent } from './automation-list/automation-list.component';
 import { AutomationFormComponent } from './automation-list/automation-form/automation-form.component';
 import { HeaderComponent } from './header/header.component';
-import { Routes,RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { ProductionListComponent } from './production-list/production-list.component';
 import { ProductionFormComponent } from './production-list/production-form/production-form.component';
 import { SingleProductionComponent } from './production-list/single-production/single-production.component';
+import { InstalationComponent } from './instalation/instalation.component';
 
 
 
-const appRoutes: Routes=[
-  {path: 'auth/signup', component: SignupComponent},
-  {path: 'auth/signin', component: SigninComponent},
-  {path: 'automations',canActivate: [AuthGuardService], component: AutomationListComponent},
-  {path: 'automations/new',canActivate: [AuthGuardService], component: AutomationFormComponent},
-  {path: 'automations/view/:id',canActivate: [AuthGuardService], component: SingleAutomationComponent},
-  {path: 'productions',canActivate: [AuthGuardService], component: ProductionListComponent},
-  {path: 'productions/new',canActivate: [AuthGuardService], component: ProductionFormComponent},
-  {path: 'productions/new/:id',canActivate: [AuthGuardService], component: ProductionFormComponent},
-  {path: 'productions/view/:id',canActivate: [AuthGuardService], component: SingleProductionComponent},
+const appRoutes: Routes = [
+  { path: 'auth/signup', component: SignupComponent },
+  { path: 'auth/signin', component: SigninComponent },
+  { path: 'automations', canActivate: [AuthGuardService], component: AutomationListComponent },
+  { path: 'automations/new', canActivate: [AuthGuardService], component: AutomationFormComponent },
+  { path: 'automations/new/:id', canActivate: [AuthGuardService], component: AutomationFormComponent },
+  { path: 'automations/view/:id', canActivate: [AuthGuardService], component: SingleAutomationComponent },
+  { path: 'productions', canActivate: [AuthGuardService], component: ProductionListComponent },
+  { path: 'productions/new', canActivate: [AuthGuardService], component: ProductionFormComponent },
+  { path: 'productions/new/:id', canActivate: [AuthGuardService], component: ProductionFormComponent },
+  { path: 'productions/view/:id', canActivate: [AuthGuardService], component: SingleProductionComponent },
   { path: '', redirectTo: 'automations', pathMatch: 'full' },
   { path: '**', redirectTo: 'automations' },
 ]
@@ -47,6 +49,7 @@ const appRoutes: Routes=[
     ProductionListComponent,
     ProductionFormComponent,
     SingleProductionComponent,
+    InstalationComponent,
 
   ],
   imports: [

@@ -18,9 +18,9 @@ export class ProductionFormComponent implements OnInit {
   fileUploaded = false;
   fileDecteted = false;
 
-  title: string = "Test";
-  reference: string = "Test";
-  watt: number = 1;
+  title: string;
+  reference: string;
+  watt: number;
   photo: string;
   oldProduction: Production;
   production: Production;
