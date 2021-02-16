@@ -1,13 +1,37 @@
-<div class="row">
-  <div class="col-xs-6 col-md-3">
-    <h2>Consomateur :</h2>
-    <div class="thumbnail">
-      <button style="max-width:250px" class="thumbnail-item" *ngFor="let automation of automations; let i = index" (click)="onViewAutomation(i)">
-        <img style="max-width:150px" *ngIf="automation.photo" [src]="automation.photo">
-        <h3 class="thumbnail-item-heading">{{automation.title}}</h3>
-        <p class="thumbnail-item-text">{{automation.reference}}</p>
-      </button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <div class="row">
+              <div class="col-xs-6">
+                <h5><span class="glyphicon glyphicon"></span> Consommateurs</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <button *ngFor="let automation of automations; let i = index" (click)="onViewAutomation(i)">
+            <div class="col-xs-5">
+              <img class="img-responsive" style="ma-width:200px" *ngIf="automation.photo" [src]="automation.photo">
+            </div>
+            <div class="col-xs-6">
+              <h4 class="product-name"><strong>{{automation.title}}</strong></h4>
+              <h4><small>{{automation.reference}}</small></h4>
+            </div>
+          </button>
+          <div class="panel-footer">
+            <div class="row text-center">
+              <div class="col-xs-3">
+                <button type="button" class="btn btn-info" (click)="onNewAutomation()">
+                  Nouveau Consomateur
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-ptimary" (click)="onNewAutomation()">Nouveau Consomateur</button>
   </div>
 </div>

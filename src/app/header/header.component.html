@@ -2,6 +2,9 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li routerLinkActive="active">
+        <a routerLink="installation">Installation</a>
+      </li>
+      <li routerLinkActive="active">
         <a routerLink="automations">Consomateur</a>
       </li>
       <li routerLinkActive="active">
@@ -16,9 +19,7 @@
         <a routerLink="auth/signin">Connexion</a>
       </li>
       <li>
-        <a (click)="onSignOut()"
-           style="cursor:pointer"
-           *ngIf="isAuth">Déconnexion de {{emailIsAuth}}</a>
+        <a (click)="onSignOut()" style="cursor:pointer" *ngIf="isAuth">Déconnexion de {{emailIsAuth}}</a>
       </li>
     </ul>
   </div>

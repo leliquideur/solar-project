@@ -1,13 +1,35 @@
-<div class="row">
-  <div class="col-xs-6 col-md-3">
-    <h2>Poducteurs :</h2>
-    <div class="thumbnail" style="max-width:250px">
-      <button class="thumbnail-item" *ngFor="let production of productions; let i = index" (click)="onViewProduction(i)">
-        <img style="max-width:150px" *ngIf="production.photo" [src]="production.photo">
-        <h3 class="thumbnail-item-heading">{{production.title}}</h3>
-        <p class="thumbnail-item-text">{{production.reference}}</p>
-      </button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <div class="row">
+              <div class="col-xs-6">
+                <h5><span class="glyphicon glyphicon"></span> Poducteurs</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <button *ngFor="let production of productions; let i = index" (click)="onViewProduction(i)">
+            <div class="col-xs-5">
+              <img style="ma-width:200px" class="img-responsive" *ngIf="production.photo" [src]="production.photo">
+            </div>
+            <div class="col-xs-6">
+              <h4 class="product-name"><strong>{{production.title}}</strong></h4>
+              <h4><small>{{production.reference}}</small></h4>
+            </div>
+          </button>
+          <div class="panel-footer">
+            <div class="row text-center">
+              <div class="col-xs-3">
+                <button class="btn btn-info" (click)="onNewProduction()">Nouveau producteur</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-ptimary" (click)="onNewProduction()">Nouveau producteur</button>
   </div>
 </div>
