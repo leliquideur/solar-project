@@ -16,7 +16,6 @@ export class ProductionsService {
   constructor() {
     this.getProductions();
   }
-
   public emitProductions(): void {
     this.productionsSubject.next(this.productions);
   }
@@ -51,26 +50,34 @@ export class ProductionsService {
         storageRef.delete().then(
           () => {
             console.log('Photo removed!');
+            resolve(console.log("resole de removePhoto OK"));
           },
           (error) => {
             console.log('Could not remove photo! : ' + error);
           }
         );
-        () => {
-          resolve(console.log("resole de removePhoto OK"));
+        ()=>{
+          reject(console.log("rejct de removePhoto OK"));
         }
       }
     )
-
   }
-
-  public createNewProduction(newProduction: Production): void {
-    this.productions.push(newProduction);
+  public createOrModifyNewProduction(newProduction: Production, id?: number, oldProduction?: Production): void {
+    if(id){
+      console.log("on va remove l'id"+oldProduction.uid);
+      this.removeProduction(oldProduction);
+      this.productions.push(newProduction);
+      console.log("fill")
+    }else{
+      /*newProduction.id=this.productions.keys;*/
+      this.productions.push(newProduction)
+      console.log("push")
+    }
     this.saveProductions();
     this.emitProductions();
   }
   removeProduction(production: Production) {
-    console.log('appel de la fonction removeProduction')
+    console.log('appel de la fonction removeProduction production.uid= '+production.uid)
     if (production.photo) {
       const storageRef = firebase.storage().refFromURL(production.photo);
       storageRef.delete().then(
@@ -84,14 +91,7 @@ export class ProductionsService {
     } else {
       console.log('Pas de photo trouvée ');
     }
-    const productionIndexToRemove = this.productions.findIndex(
-      (productionEl) => {
-        if (productionEl === production) {
-          return true;
-        }
-      }
-    );
-    this.productions.splice(productionIndexToRemove, 1);
+    this.productions.splice(production.uid, 1);
     this.saveProductions();
     this.emitProductions();
   }

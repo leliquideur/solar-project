@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-10 col-sm-offset-1">
+  <div class="col-sm-6 col-sm-offset-3">
     <h2>Enregistrer un nouveau consomateur</h2>
     <form *ngIf="productionForm" [formGroup]="productionForm" (ngSubmit)="onSaveProduction()">
       <div class="row">
@@ -13,16 +13,26 @@
         </div>
         <div class="form-group">
           <label for="watt">Entrer la production max du panneau solaire en watt</label>
-          <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="watt" placeholder="ex: 80" formControlName="watt">
+          <input type="number" step="1" min="0" max="1000" value="0" class="form-control" id="watt" placeholder="ex: 80" formControlName="watt">
         </div>
       </div>
-      <img style="max-width:400px;" *ngIf="production.photo" [src]="production.photo">
+      <img style="max-width:400px;" *ngIf="photo" [src]="photo">
       <div class="form-group">
         <h4>Ajouter/Modifier une photo</h4>
-        <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+        <button (click)="clearFiles($event)" *ngIf="fileDecteted" type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-remove">
+        </span>
+        </button>
+        <input #productionPhoto [disabled]="fileDecteted"
+                type="file" (change)="detectFiles($event)"
+                class="form-control"
+                accept="image/*"
+                id="productionPhoto">
         <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
       </div>
-      <button class="btn btn-success" [disabled]="productionForm.invalid " type="submit">Enregistrer
+      <button class="btn btn-success"
+              [disabled]="productionForm.invalid "
+              type="submit">Enregistrer
       </button>
     </form>
   </div>

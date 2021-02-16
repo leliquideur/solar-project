@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import{Production}from'../../models/Production.model';
-import{ProductionsService}from'../../services/production.service';
-import{ActivatedRoute,Router}from'@angular/router';
+import { Production } from '../../models/Production.model';
+import { ProductionsService } from '../../services/production.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-production',
@@ -10,29 +10,35 @@ import{ActivatedRoute,Router}from'@angular/router';
 })
 export class SingleProductionComponent implements OnInit {
   production: Production;
-  id:number;
+  id: number;
   constructor(private route: ActivatedRoute,
-              private productionsService: ProductionsService,
-              private router: Router) { }
+    private productionsService: ProductionsService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.production=new Production('','',0,);
-    this.id =this.route.snapshot.params["id"];
+    this.id = this.route.snapshot.params["id"];
+    this.production = new Production('', '', 0);
     this.productionsService.getSingleProduction(this.id).then(
-      (production:Production)=>{
-              this.production=production;
+      (production: Production) => {
+        this.production = production;
+        this.production.uid = this.id;
+        console.log("this.production.uid=" + this.production.uid)
       }
     );
   }
-  onBack(){
+  onBack() {
     this.router.navigate(['/productions']);
   }
-  onDeleteProduction(production: Production){
+  onDeleteProduction(production: Production) {
+    /*if(confirm('Supprimer votre appareils ?')) {*/
+    console.log("this.production.uid=" + this.production.uid)
     this.productionsService.removeProduction(production);
     this.onBack();
+    /*} else {
+      return null;
+    }*/
   }
-  onModifyProduction(production: Production){
-    this.router.navigate(['/productions','new',this.id]);
+  onModifyProduction() {
+    this.router.navigate(['/productions', 'new', this.id]);
   }
-
 }

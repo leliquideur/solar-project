@@ -7,7 +7,7 @@ import "firebase/firestore";
   providedIn: 'root'
 })
 export class AuthService {
-
+  protected userID: any;
   constructor() { }
   createNewUser(email: string, password: string) {
     /* j'ai du rajouter void sur les 2 promise*/
@@ -29,6 +29,7 @@ export class AuthService {
         (resolve, reject) => {
           firebase.auth().signInWithEmailAndPassword(email, password).then(
             () => {
+
               resolve(console.log("Promise de signInUser ok"));
             },
             (error) => {
@@ -38,6 +39,7 @@ export class AuthService {
         }
       );
   }
+
   signOutUser() {
     firebase.auth().signOut();
   }

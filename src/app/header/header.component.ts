@@ -9,7 +9,8 @@ import firebase from "firebase/app";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isAuth : boolean;
+  public isAuth : boolean;
+  public emailIsAuth: string;
   constructor(private authService: AuthService) { }
 
   ngOnInit(){
@@ -17,8 +18,10 @@ export class HeaderComponent implements OnInit {
       (user)=>{
         if(user){
           this.isAuth = true;
+          this.emailIsAuth=user.email;
         }else{
           this.isAuth = false;
+          this.emailIsAuth=null;
         }
       }
     );

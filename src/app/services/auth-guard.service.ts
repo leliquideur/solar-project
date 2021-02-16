@@ -7,22 +7,26 @@ import "firebase/firestore";
 
 @Injectable()
 export class AuthGuardService implements CanActivate{
-
+  protected user: any;
   constructor(private router: Router) { }
   canActivate(): Observable<boolean> | Promise<boolean> | boolean{
     return new Promise(
-    (resolve, reject)=>{
+    (resolve)=>{
         firebase.auth().onAuthStateChanged(
           (user)=>{
             if(user){
+              this.user=user;
               resolve(true);
             }else{
               this.router.navigate(['/auth','signin']);
               resolve(false);
             }
-          }
+          },
         );
       }
     );
+  }
+  getUserUID(){
+    return this.user
   }
 }
