@@ -6,7 +6,7 @@
           <div class="panel-title">
             <div class="row">
               <div class="col-xs-6">
-                <h5><span class="glyphicon glyphicon"></span> Poducteurs</h5>
+                <h5><span class="glyphicon glyphicon-unchecked"></span> Poducteurs</h5>
               </div>
             </div>
           </div>
@@ -14,7 +14,7 @@
         <div class="panel-body">
           <button *ngFor="let production of productions; let i = index" (click)="onViewProduction(i)">
             <div class="col-xs-5">
-              <img style="ma-width:200px" class="img-responsive" *ngIf="production.photo" [src]="production.photo">
+              <img class="img-responsive" *ngIf="production.photo" [src]="production.photo">
             </div>
             <div class="col-xs-6">
               <h4 class="product-name"><strong>{{production.title}}</strong></h4>

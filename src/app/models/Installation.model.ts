@@ -4,6 +4,7 @@ import { Production } from 'src/app/models/Production.model';
 export class Installation {
   public uid: number;
   constructor(
+    public businessName: String,
     public automation: Automation,
     public security: Automation[],
     public accesory: Automation[],

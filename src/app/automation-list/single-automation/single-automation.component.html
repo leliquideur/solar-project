@@ -7,7 +7,7 @@
     <h3>Temps de cycle : {{ automation.cycleTime }} secondes</h3>
     <h3>Consomation max : {{ automation.ampere }} A</h3>
     <h3>Consomation au repos : {{ automation.standBy }} A</h3>
-    <h3>Consomation par cylce: {{ automation.cylceAmpere | number }} A</h3>
+    <h3>Consomation par cylce: {{ automation.cycleAmpere | number }} A</h3>
     <button class="btn btn-success" (click)="onBack()">Retour</button>
     <button class="btn btn-danger pull-right" (click)="onDeleteAutomation(automation)">
       <span>Supprimer</span>

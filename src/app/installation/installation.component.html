@@ -1,1 +1,49 @@
-<p>installation works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <div class="row">
+              <div class="col-xs-6">
+                <h5>
+                  <span class="glyphicon glyphicon-unchecked"></span>
+                  Information sur l'instalation
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form *ngIf="installationForm" [formGroup]="installationForm" (ngSubmit)="onSaveAutomation()">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="businessName">Référence de l'affaire</label>
+                  <input maxlength="45" type="text" class="form-control" id="businessName" placeholder="Reference" formControlName="businessName">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="automation">Choix de l'automatisme</label>
+                  <select class="form-control" id="automation" formControlName="automation">
+                    <option *ngFor="let automation of automations; let i = index">{{automation.title}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cycleDay">Entrer le nombre d'ouverture par jour (1= une ouverture et fermeture)</label>
+                  <input type="number" step="1" min="0" max="100" value="0" class="form-control" id="cycleDay" placeholder="Cycle journalier" formControlName="cycleDay">
+                </div>
+                <div role="separator" class="divider"></div>
+                <div class="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
