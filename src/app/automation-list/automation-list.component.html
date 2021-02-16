@@ -1,20 +1,13 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h2>Consomateurs enregistrés</h2>
-    <div class="list-group">
-
-      <button class="llist-group-item"
-              *ngFor="let automation of automations; let i = index"
-              (click)="onViewAutomation(i)">
-        <img style="max-width:400px;" *ngIf="automation.photo" [src]="automation.photo">
-        <h3 class="list-group-item-heading">
-        {{automation.title}}
-        </h3>
-        <p class="list-group-item-text">{{automation.reference}}</p>
+  <div class="col-xs-6 col-md-3">
+    <h2>Consomateur :</h2>
+    <div class="thumbnail">
+      <button style="max-width:250px" class="thumbnail-item" *ngFor="let automation of automations; let i = index" (click)="onViewAutomation(i)">
+        <img style="max-width:150px" *ngIf="automation.photo" [src]="automation.photo">
+        <h3 class="thumbnail-item-heading">{{automation.title}}</h3>
+        <p class="thumbnail-item-text">{{automation.reference}}</p>
       </button>
     </div>
-    <button class="btn btn-ptimary"
-            (click)="onNewAutomation()">Nouveau consomateur
-    </button>
+    <button class="btn btn-ptimary" (click)="onNewAutomation()">Nouveau Consomateur</button>
   </div>
 </div>

@@ -1,17 +1,15 @@
 <div class="row">
   <div class="col-xs-12">
-    <img class="pull-right" style="max-width:300px;" *ngIf="production.photo" [src]="production.photo">
+    <img class="pull-right" style="width:150px" *ngIf="production.photo" [src]="production.photo">
     <h1>{{ production.title }}</h1>
     <h3>Référence : {{ production.reference }}</h3>
     <h3>Production max par heure : {{ production.watt }} watt</h3>
     <button class="btn btn-success" (click)="onBack()">Retour</button>
-    <button class="btn btn-default pull-right"
-            (click)="onModifyProduction()">
-            <span >Modifier</span>
+    <button class="btn btn-default pull-right" (click)="onModifyProduction()">
+      <span>Modifier</span>
     </button>
-    <button class="btn btn-danger pull-right"
-            (click)="onDeleteProduction(production)">
-            <span >Supprimer</span>
+    <button class="btn btn-danger pull-right" (click)="onDeleteProduction(production)">
+      <span>Supprimer</span>
     </button>
   </div>
 

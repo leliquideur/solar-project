@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <img style="max-width:400px;" *ngIf="automation.photo" [src]="automation.photo">
+    <img class="pull-right" style="width:200px" *ngIf="automation.photo" [src]="automation.photo">
     <h1>{{ automation.title }}</h1>
     <h3>Référence : {{ automation.reference }}</h3>
     <h3>Type : {{ automation.type }}</h3>
@@ -8,12 +8,12 @@
     <h3>Consomation max : {{ automation.ampere }} A</h3>
     <h3>Consomation au repos : {{ automation.standBy }} A</h3>
     <h3>Consomation par cylce: {{ automation.cylceAmpere | number }} A</h3>
-    <button class="btn btn-default" (click)="onBack()">Retour</button>
-    <button class="btn btn-default pull-right"
-            (click)="onDeleteAutomation(automation)">
-            <span >
-              Supprimer de la base de donnée
-            </span>
+    <button class="btn btn-success" (click)="onBack()">Retour</button>
+    <button class="btn btn-danger pull-right" (click)="onDeleteAutomation(automation)">
+      <span>Supprimer</span>
+    </button>
+    <button class="btn btn-default pull-right" (click)="onModifyAutomation()">
+      <span>Modifier</span>
     </button>
   </div>
 

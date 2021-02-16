@@ -1,20 +1,13 @@
-<div class="col-lg-1-12">
-  <div class="col-sm-12">
+<div class="row">
+  <div class="col-xs-6 col-md-3">
     <h2>Poducteurs :</h2>
-    <div class="list-group" style="width:250px;">
-
-      <button class="llist-group-item"
-              *ngFor="let production of productions; let i = index"
-              (click)="onViewProduction(i)">
-        <img style="width:200px;" *ngIf="production.photo" [src]="production.photo">
-        <h3 class="list-group-item-heading">
-        {{production.title}}
-        </h3>
-        <p class="list-group-item-text">{{production.reference}}</p>
+    <div class="thumbnail" style="max-width:250px">
+      <button class="thumbnail-item" *ngFor="let production of productions; let i = index" (click)="onViewProduction(i)">
+        <img style="max-width:150px" *ngIf="production.photo" [src]="production.photo">
+        <h3 class="thumbnail-item-heading">{{production.title}}</h3>
+        <p class="thumbnail-item-text">{{production.reference}}</p>
       </button>
     </div>
-    <button class="btn btn-ptimary"
-            (click)="onNewProduction()">Nouveau producteur
-    </button>
+    <button class="btn btn-ptimary" (click)="onNewProduction()">Nouveau producteur</button>
   </div>
 </div>

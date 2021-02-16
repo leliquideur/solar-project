@@ -16,7 +16,6 @@ export class AutomationsService {
   constructor() {
     this.getAutomations();
   }
-
   public emitAutomations(): void {
     this.automationsSubject.next(this.automations);
   }
@@ -44,13 +43,41 @@ export class AutomationsService {
       },
     );
   }
-  public createNewAutomation(newAutomation: Automation): void {
-    this.automations.push(newAutomation);
+  removePhoto(automation: Automation): Promise<unknown> {
+    return new Promise(
+      (resolve, reject) => {
+        const storageRef = firebase.storage().refFromURL(automation.photo);
+        storageRef.delete().then(
+          () => {
+            console.log('Photo removed!');
+            resolve(console.log("resole de removePhoto OK"));
+          },
+          (error) => {
+            console.log('Could not remove photo! : ' + error);
+          }
+        );
+        ()=>{
+          reject(console.log("rejct de removePhoto OK"));
+        }
+      }
+    )
+  }
+  public createOrModifyNewAutomation(newAutomation: Automation, id?: number, oldAutomation?: Automation): void {
+    if(id){
+      console.log("on va remove l'id"+oldAutomation.uid);
+      this.removeAutomation(oldAutomation);
+      this.automations.push(newAutomation);
+      console.log("fill")
+    }else{
+      /*newAutomation.id=this.automations.keys;*/
+      this.automations.push(newAutomation)
+      console.log("push")
+    }
     this.saveAutomations();
     this.emitAutomations();
   }
   removeAutomation(automation: Automation) {
-    console.log('appel de la fonction removeAutomation')
+    console.log('appel de la fonction removeAutomation automation.uid= '+automation.uid)
     if (automation.photo) {
       const storageRef = firebase.storage().refFromURL(automation.photo);
       storageRef.delete().then(
@@ -61,18 +88,10 @@ export class AutomationsService {
           console.log('Could not remove photo! : ' + error);
         }
       );
-    }else{
+    } else {
       console.log('Pas de photo trouvée ');
     }
-console.log('67');
-    const automationIndexToRemove = this.automations.findIndex(
-      (automationEl) => {
-        if (automationEl === automation) {
-          return true;
-        }
-      }
-    );
-    this.automations.splice(automationIndexToRemove, 1);
+    this.automations.splice(automation.uid, 1);
     this.saveAutomations();
     this.emitAutomations();
   }
