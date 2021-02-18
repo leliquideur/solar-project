@@ -31,8 +31,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="modelAutomationFormControl"><br>Automatisme</label>
-                      <select formControlName="modelAutomationFormControl"  class="form-control" id="modelAutomationFormControl">
-                        <option *ngFor="let automation of automations; let i = index">{{automation.title}}</option>
+                      <select formControlName="modelAutomationFormControl" class="form-control" id="modelAutomationFormControl">
+                        <option *ngFor="let automation of automations; let i = index" [value]="automation.reference">{{automation.title}}</option>
                       </select>
                     </div>
                   </div>
@@ -55,7 +55,7 @@
                       <div class="form-group">
                         <label for="security">Model :</label>
                         <select class="form-control" id="security" formControlName="modelSecurityFormControl" value="security.title">
-                          <option *ngFor="let security of securities; let ib = index">{{security.title}}</option>
+                          <option *ngFor="let security of securities; let ib = index" [defaultSelected]=true [value]="security.reference">{{security.title}}</option>
                         </select>
                       </div>
                     </div>

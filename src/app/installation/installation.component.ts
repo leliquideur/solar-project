@@ -31,6 +31,8 @@ export class InstallationComponent implements OnInit {
   public cycleAmpere: number;
   public nbSecurities: Number[] = Array(1);
   public nbAccessories: Number[];
+  selectedCountry = '';
+
 
 
   /*Test FormGroup*/
@@ -59,11 +61,13 @@ export class InstallationComponent implements OnInit {
         this.automations = automations.filter(automation => automation.type === "Automatisme");
         this.securities = automations.filter(security => security.type === "Sécurité");
         this.accessories = automations.filter(accessory => accessory.type === "Accesoire");
+
         this.initFormm();
       }
     );
     this.automationsService.emitAutomations();
     this.id = this.route.snapshot.params["id"];
+
 
   }
   initFormm() {
@@ -86,14 +90,14 @@ export class InstallationComponent implements OnInit {
   addSecurity() {
     this.securitiesFormArray.push(
       new FormGroup({
-        modelSecurityFormControl: new FormControl(this.securities[0].title, [Validators.required]),
+        modelSecurityFormControl: new FormControl('', [Validators.required]),
         nombreSecurityFormControl: new FormControl(1, [Validators.required]),
       }))
   }
   get securitiesGetter() {
     return this.installationForm.get('securitiesFormArray') as FormArray;
   }
-  /*selectedAutomotion(){ //*A Rajouter dans le template [(ngModel)]="selectedAutomotion" 
+  selectedAutomotion(){ //*A Rajouter dans le template [(ngModel)]="selectedAutomotion"
 
-  }*/
+  }
 }
