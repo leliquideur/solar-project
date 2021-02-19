@@ -29,20 +29,17 @@ export class InstallationComponent implements OnInit {
   public production: Production;
   public cycleDay: number;
   public cycleAmpere: number;
-  public nbSecurities: Number[] = Array(1);
-  public nbAccessories: Number[];
-  selectedCountry = '';
+
 
 
 
   /*Test FormGroup*/
   public installationForm = new FormGroup({});
-  securitiesFormArray = new FormArray([]);
-  public securitiesFormGroup= new FormGroup({
-
-  });
-
   public consumerFormGroup: FormGroup;
+  public securitiesFormGroup= new FormGroup({});
+  public securitiesFormArray = new FormArray([]);
+  public accessoriesFormGroup= new FormGroup({});
+  public accessoriesFormArray= new FormArray([]);
 
 
 
@@ -60,7 +57,7 @@ export class InstallationComponent implements OnInit {
       (automations: Automation[]) => {
         this.automations = automations.filter(automation => automation.type === "Automatisme");
         this.securities = automations.filter(security => security.type === "Sécurité");
-        this.accessories = automations.filter(accessory => accessory.type === "Accesoire");
+        this.accessories = automations.filter(accessory => accessory.type === "Accessoire");
 
         this.initFormm();
       }
@@ -80,11 +77,11 @@ export class InstallationComponent implements OnInit {
           nombreAutomationFormControl: ['', Validators.required],
         }),
         securitiesFormArray: this.securitiesFormArray,
-        //securitiesFormArray: this.formBuilder.array([]),
+        accessoriesFormArray: this.accessoriesFormArray,
       })
     })
   }
-  onRemoveSecurity(i){
+  onRemoveSecurity(i: any){
     this.securitiesFormArray.removeAt(i)
   }
   addSecurity() {
@@ -97,7 +94,18 @@ export class InstallationComponent implements OnInit {
   get securitiesGetter() {
     return this.installationForm.get('securitiesFormArray') as FormArray;
   }
-  selectedAutomotion(){ //*A Rajouter dans le template [(ngModel)]="selectedAutomotion"
-
+  onRemoveAccesory(i: any){
+    this.accessoriesFormArray.removeAt(i)
   }
+  addAccesory() {
+    this.accessoriesFormArray.push(
+      new FormGroup({
+        modelAccesoryFormControl: new FormControl('', [Validators.required]),
+        nombreAccesoryFormControl: new FormControl(1, [Validators.required]),
+      }))
+  }
+  get AccesoryGetter() {
+    return this.installationForm.get('accessoriesFormArray') as FormArray;
+  }
+
 }

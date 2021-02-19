@@ -30,7 +30,7 @@
                 <div class="row" id="automationChoice">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="modelAutomationFormControl"><br>Automatisme</label>
+                      <label for="modelAutomationFormControl"><br>Automatisme :</label>
                       <select formControlName="modelAutomationFormControl" class="form-control" id="modelAutomationFormControl">
                         <option *ngFor="let automation of automations; let i = index" [value]="automation.reference">{{automation.title}}</option>
                       </select>
@@ -38,7 +38,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="nombreAutomationFormControl">Nombre d'ouverture par jour (1= une ouverture et fermeture)</label>
+                      <label for="nombreAutomationFormControl">Nombre d'ouverture par jour :<br> (1= une ouverture et fermeture)</label>
                       <input formControlName="nombreAutomationFormControl" type="number" step="1" min="0" max="100" value="0" class="form-control" id="nombreAutomationFormControl" placeholder="Cycle journalier">
                     </div>
                   </div>
@@ -48,25 +48,64 @@
               </div>
               <div formArrayName="securitiesFormArray">
                 <h3>Sécuritées :</h3>
-                <button (click)="addSecurity()">Ajouter</button>
+                <button class="btn btn-success" (click)="addSecurity()">Ajouter</button>
                 <div *ngFor="let alias of securitiesFormArray.controls; let i=index">
                   <div class="row" [formGroupName]="i">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="security">Model :</label>
                         <select class="form-control" id="security" formControlName="modelSecurityFormControl" value="security.title">
-                          <option *ngFor="let security of securities; let ib = index" [defaultSelected]=true [value]="security.reference">{{security.title}}</option>
+                          <option *ngFor="let security of securities; let ib = index" [value]="security.reference">{{security.title}}</option>
                         </select>
                       </div>
                     </div>
-                    <div class="col-sm-4">
-                      <label for="cycleDay">Nombre</label>
+                    <div class="col-sm-2">
+                      <label for="cycleDay">Nombre :</label>
                       <input formControlName="nombreSecurityFormControl" type="number" step="1" min="0" max="100" value="0" class="form-control" id="cycleDay" placeholder="Ex: 1">
                     </div>
                     <div class="col-sm-2">
                       <br>
-                      <button (click)="onRemoveSecurity(i)">Supprimer</button>
+                      <button class="btn btn-danger" (click)="onRemoveSecurity(i)">Supprimer</button>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div formArrayName="accessoriesFormArray">
+                <h3>Accesoires :</h3>
+                <button class="btn btn-success" (click)="addAccesory()">Ajouter</button>
+                <div *ngFor="let alias of accessoriesFormArray.controls; let i=index">
+                  <div class="row" [formGroupName]="i">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="accesory">Model :</label>
+                        <select class="form-control" id="accesory" formControlName="modelAccesoryFormControl" value="accesory.title">
+                          <option *ngFor="let accessory of accessories; let id = index" [value]="accessory.reference">{{accessory.title}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <label for="cycleDay">Nombre :</label>
+                      <input formControlName="nombreAccesoryFormControl" type="number" step="1" min="0" max="100" value="0" class="form-control" id="cycleDay" placeholder="Ex: 1">
+                    </div>
+                    <div class="col-sm-2">
+                      <br>
+                      <button class="btn btn-danger" (click)="onRemoveAccesory(i)">Supprimer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="information-consumer">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <h5>
+                      Consomtation des équipements par jour
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h6>Automatisme : </h6>
+
                   </div>
                 </div>
               </div>
