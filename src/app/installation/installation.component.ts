@@ -16,7 +16,7 @@ export class InstallationComponent implements OnInit {
   automations: Automation[];
   securities: Automation[];
   accessories: Automation[];
-  automationsSubsciption: Subscription;
+  automationsSubscription: Subscription;
   /*automation: Automation;*/
 
   installation: Installation;
@@ -24,6 +24,7 @@ export class InstallationComponent implements OnInit {
   /*instalation models*/
   public businessName: String;
   public automation: Automation;
+  public automationSelected: String;
   public security: Automation[];
   public accesory: Automation[];
   public production: Production;
@@ -35,11 +36,10 @@ export class InstallationComponent implements OnInit {
 
   /*Test FormGroup*/
   public installationForm = new FormGroup({});
-  public consumerFormGroup: FormGroup;
-  public securitiesFormGroup= new FormGroup({});
+  public securitiesFormGroup = new FormGroup({});
   public securitiesFormArray = new FormArray([]);
-  public accessoriesFormGroup= new FormGroup({});
-  public accessoriesFormArray= new FormArray([]);
+  public accessoriesFormGroup = new FormGroup({});
+  public accessoriesFormArray = new FormArray([]);
 
 
 
@@ -53,7 +53,7 @@ export class InstallationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.automationsSubsciption = this.automationsService.automationsSubject.subscribe(
+    this.automationsSubscription = this.automationsService.automationsSubject.subscribe(
       (automations: Automation[]) => {
         this.automations = automations.filter(automation => automation.type === "Automatisme");
         this.securities = automations.filter(security => security.type === "Sécurité");
@@ -81,7 +81,7 @@ export class InstallationComponent implements OnInit {
       })
     })
   }
-  onRemoveSecurity(i: any){
+  onRemoveSecurity(i: any) {
     this.securitiesFormArray.removeAt(i)
   }
   addSecurity() {
@@ -94,7 +94,7 @@ export class InstallationComponent implements OnInit {
   get securitiesGetter() {
     return this.installationForm.get('securitiesFormArray') as FormArray;
   }
-  onRemoveAccesory(i: any){
+  onRemoveAccesory(i: any) {
     this.accessoriesFormArray.removeAt(i)
   }
   addAccesory() {
@@ -107,5 +107,7 @@ export class InstallationComponent implements OnInit {
   get AccesoryGetter() {
     return this.installationForm.get('accessoriesFormArray') as FormArray;
   }
-
+  onSubmit() {
+    console.log(this.installationForm.value.consumerFormGroup.automationFormGroup.modelAutomationFormControl.reference);
+  }
 }

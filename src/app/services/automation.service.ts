@@ -65,7 +65,11 @@ export class AutomationsService {
   public createOrModifyNewAutomation(newAutomation: Automation, id?: number, oldAutomation?: Automation): void {
     if(id){
       console.log("on va remove l'id"+oldAutomation.uid);
-      this.removeAutomation(oldAutomation);
+      if(oldAutomation.photo === newAutomation.photo){
+        this.removeAutomationButNoPhoto(oldAutomation)
+      }else{
+        this.removeAutomation(oldAutomation);
+      }
       this.automations.push(newAutomation);
       console.log("fill")
     }else{
@@ -73,6 +77,12 @@ export class AutomationsService {
       this.automations.push(newAutomation)
       console.log("push")
     }
+    this.saveAutomations();
+    this.emitAutomations();
+  }
+  removeAutomationButNoPhoto(automation: Automation) {
+    console.log('appel de la fonction removeAutomationButNoPhoto automation.uid= '+automation.uid)
+    this.automations.splice(automation.uid, 1);
     this.saveAutomations();
     this.emitAutomations();
   }
